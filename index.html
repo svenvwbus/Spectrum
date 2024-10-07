@@ -1,0 +1,153 @@
+<!--copyright by DL1SJN Sven Jacobs -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequenzspektrum mit WebSDR-Links und Kontextmenü</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="favicon-32x32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div id="blockAnzeige"></div>
+    <center><h1>Die Kurzwelle mit Langwelle und Mittelwelle als statisches Spektrum</h1></center>
+
+    <div id="container">
+        <div id="spectrum"></div>
+        <div id="scale"></div>
+    </div>
+    <div id="tooltip"></div>
+    <div id="context-menu">
+        <ul></ul>
+    </div>
+
+    <div id="tab-container">
+      <ul class="tabs">
+        <li class="active" data-tab="tab1">Übersicht</li>
+        <li data-tab="tab2">Frequenzbänder</li>
+        <li data-tab="tab3">WebSDRs</li>
+        <li data-tab="tab4">Legende</li>
+        <li data-tab="tab5">WebSDR-Plattformlisten</li>
+        <li data-tab="tab6">Frequenzband-Infos</li>
+        <li data-tab="tab7">Beta</li>
+      </ul>
+      
+      <div id="tab1" class="tab-content active">
+        <p>Das hier vorgestellte, 30MHz breite, statische Frequenzspektrum ist interaktiv benutzbar. <br>
+           Sie können durch Klicken auf die Frequenzen die entsprechenden WebSDRs öffnen.<br> 
+           Die linke Maustaste öffnet einen vorgegebenen Standard-WebSDR, die rechte Maustaste zeigt eine Auswahl von WebSDRs an.</p><br>
+        <p>Durch Bewegen der Maus über das Spektrum kommen zusätzliche Informationen als Kontext unter dem Mauszeiger zum Vorschein.</p>
+      </div>
+      
+      <div id="tab2" class="tab-content">
+        <div id="bandsContainer"></div>
+      </div>
+      
+      <div id="tab3" class="tab-content">
+        <h2>Von Autor dieser Seite, die meistgenutzten SDRs</h2>
+        <ul id="sdrList"></ul>
+      </div>
+        
+      <div id="tab4" class="tab-content">
+        <div class="legend">
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #00FF00;"></div>
+              <span>Broadcast (Rundfunk)</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #FF0000;"></div>
+              <span>Amateurfunk</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #FFA500;"></div>
+              <span>CB-Funk</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #800080;"></div>
+              <span>Mittelwelle</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #008080;"></div>
+              <span>Langwelle</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: yellow;"></div>
+              <span>ISM-Band</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #FF69B4;"></div>
+              <span>Ungerichtete Funkfeuer</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #1E90FF;"></div>
+              <span>Piratensender</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #20B2AA;"></div>
+              <span>Luftfahrt</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #8B4513;"></div>
+              <span>Militär</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #4682B4;"></div>
+              <span>Seefunk</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #FF6347;"></div>
+              <span>Zeitzeichen</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #9932CC;"></div>
+              <span>Chaos</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #00CED1;"></div>
+              <span>SSB-Feeder</span>
+          </div>
+          <div class="legend-item">
+              <div class="color-box" style="background-color: #FF4500;"></div>
+              <span>Radioastronomie</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab5" class="tab-content active">
+        <h2>WebSDR-Plattformen</h2>
+        <ul>
+            <li><a href="http://www.websdr.org" target="_blank" style="color: #00CED1;">WebSDR.org</a></li>
+            <li><a href="https://www.receiverbook.de/" target="_blank" style="color: #00CED1;">OpenWebRX.de</a></li>
+            <li><a href="http://kiwisdr.com/public" target="_blank" style="color: #00CED1;">KiwiSDR.com/public</a></li>
+            <li><a href="https://phantomsdr.github.io/servers" target="_blank" style="color: #00CED1;">PhantomSDR.github.io/servers</a></li>
+            <li><a href="http://sdr-list.xyz" target="_blank" style="color: #00CED1;">PhantomSDR Plus sdr-list.xyz</a></li>
+            <li><a href="https://rx-tx.info/" target="_blank" style="color: #00CED1;">rt-tx.info</a></li>
+        </ul>
+      </div>
+
+      <div id="tab6" class="tab-content">
+        <h2>Links zu Frequenzbandinformationen</h2>
+        <ul>
+          <li><a href="http://www.funkwelle.com/radio/die-meterbaender-kurzwelle.html" target="_blank">Die Rundfunk Meterbänder der Kurzwelle im Detail</a></li>
+          <li><a href="https://www.fading.de/ueber_die_kurzwelle/meterbaender_auf_kurzwelle" target="_blank">Meterbänder der Kurzwelle</a></li>
+          <li><a href="https://www.fading.de/ueber_die_kurzwelle/sender_auf_lang-und_mittelwelle" target="_blank">Die Rundfunk Meterbänder der Lang-, Mittelwelle</a></li>
+        </ul>
+      </div>
+
+<div id="tab7" class="tab-content">
+    <h2>Betaseiten</h2>
+<ul>
+          <li><a href="../spektrum6/" target="_blank">Die Rundfunk Meterbänder der Kurzwelle im Detail
+          in einem anderem Spektrum, allerdings noch Beta</a></li>
+</ul>
+</div>
+</div>
+    <script src="js/config.js"></script>
+    <script src="js/bands.js"></script>
+    <script src="js/displayBands.js"></script>
+    <script src="js/spectrum.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
